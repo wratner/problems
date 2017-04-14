@@ -15,7 +15,10 @@ func TestGetLongestCommonSubstring(t *testing.T) {
 
 func TestReadInput(t *testing.T) {
 	input := "test\n"
-	result, _ := readInput(strings.NewReader(input))
+	result, err := readInput(strings.NewReader(input))
+	if err != nil {
+		t.Error("Error: ", err.Error)
+	}
 	if result != strings.TrimSpace(input) {
 		t.Error("Expected: " + input + " Received: " + result)
 	}
