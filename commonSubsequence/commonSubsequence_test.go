@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestGetSequences(t *testing.T) {
 	expected := []string{"XMJYAUZ;MZJAWXU", "AATCC;ACACG", "invalidSequence"}
@@ -8,9 +11,7 @@ func TestGetSequences(t *testing.T) {
 	if err != nil {
 		t.Error("Error: ", err.Error)
 	}
-	if expected[0] != sequences[0] ||
-		expected[1] != sequences[1] ||
-		expected[2] != sequences[2] {
+	if !reflect.DeepEqual(expected, sequences) {
 		t.Errorf("Expected: %v Received: %v", expected, sequences)
 	}
 }
@@ -30,8 +31,7 @@ func TestGetSubSequences(t *testing.T) {
 	if err != nil {
 		t.Error("Error: ", err.Error)
 	}
-	if expected[0] != subsequences[0] ||
-		expected[1] != subsequences[1] {
+	if !reflect.DeepEqual(expected, subsequences) {
 		t.Errorf("Expected: %v Received: %v", expected, subsequences)
 	}
 }
